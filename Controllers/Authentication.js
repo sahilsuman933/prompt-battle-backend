@@ -22,22 +22,9 @@ const Authentication = {
       });
     }
 
-    const { team_name, security_code, api_key } = req.body;
-
-    // Validate API KEY
-    const isValid = await ImageGenerate.generateImage(
-      "test",
-      1,
-      "1024x1024",
-      api_key
-    );
-
-    if (isValid.error) {
-      return res.status(401).json({
-        message: isValid.error_message,
-      });
-    }
-
+    let status = ["is-invalid", "is-invalid", "", "is-invalid"];
+    const { name, team_name, security_code, api_key } = req.body;
+    let isDataCorrect = true;
     // Verify Security Code
 
     const users = await DB.fetchData("users");
@@ -45,19 +32,59 @@ const Authentication = {
     let error_message = {};
 
     users.map((user) => {
+      if (user.name === name) {
+        status[0] = "is-valid";
+      }
+
       if (user.team === team_name) {
-        if (security_code === user.security_code) {
+        status[1] = "is-valid";
+      }
+
+      if (user.team === team_name) {
+        if (user.security_code === security_code) {
           id = user.id;
-          error_message = {
-            error: false,
-          };
+          status[3] = "is-valid";
         }
       }
     });
 
-    if (isEmpty(error_message)) {
-      return res.send({
-        message: "Team Does Not Exist!",
+    if (status[1] === "is-invalid") {
+      error_message = {
+        message: "Team does not exist. Please register",
+      };
+    }
+
+    if (status[1] === "is-valid" && status[3] === "is-invalid") {
+      error_message = {
+        message: "Security Code is incorrect.",
+      };
+    }
+
+    // Validate API KEY
+    const isValid = await ImageGenerate.generateImage(
+      "test image",
+      1,
+      "1024x1024",
+      api_key
+    );
+
+    if (isValid.error) {
+      status[2] = "is-invalid";
+    } else {
+      status[2] = "is-valid";
+    }
+
+    status.map((data) => {
+      if (data === "is-invalid") {
+        isDataCorrect = false;
+      }
+    });
+
+    if (!isDataCorrect) {
+      res.json({
+        validArray: status,
+        isLoggedIn: false,
+        message: "Login Failed",
       });
     }
 
@@ -69,7 +96,9 @@ const Authentication = {
 
     try {
       res.json({
-        message: "Successfully Logged in.",
+        validArray: status,
+        isLoggedIn: true,
+        message: "Login Successful",
       });
     } catch (err) {
       console.log(err);
