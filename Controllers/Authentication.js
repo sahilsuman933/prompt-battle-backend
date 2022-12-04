@@ -1,7 +1,6 @@
 import Joi from "joi";
 import ImageGenerate from "../services/image-generate";
 import DB from "../services/database-service";
-import { isEmpty } from "@firebase/util";
 import crypto from "crypto";
 
 const Authentication = {
@@ -81,7 +80,7 @@ const Authentication = {
     });
 
     if (!isDataCorrect) {
-      res.json({
+      return res.json({
         validArray: status,
         isLoggedIn: false,
         message: "Login Failed",
@@ -92,10 +91,11 @@ const Authentication = {
 
     DB.updateData("users", id, {
       security_code: `${crypto.randomInt(100000, 999999)}`,
+      key: api_key,
     });
 
     try {
-      res.json({
+      return res.json({
         validArray: status,
         isLoggedIn: true,
         message: "Login Successful",
