@@ -5,6 +5,7 @@ import path from "path";
 import fs from "fs";
 import bodyParser from "body-parser";
 import morganBody from "morgan-body";
+import SocketIO from 'socket.io';
 
 const app = express();
 var log = fs.createWriteStream(path.join(__dirname, "access.log"), {
@@ -13,7 +14,9 @@ var log = fs.createWriteStream(path.join(__dirname, "access.log"), {
 
 const port = 8080;
 
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
 app.use(bodyParser.json());
 morganBody(app, {
   noColors: true,
@@ -23,6 +26,15 @@ morganBody(app, {
 
 app.use("/api", router);
 
-app.listen(port, () => {
+const server=app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
+let io = new SocketIO(server,{
+  cors: {
+      origin: "*",
+  }});
+io.on('connection', (socket) =>
+    {
+      console.log('Client Connected Successfully!');
+    }
+);
