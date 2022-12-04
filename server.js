@@ -17,7 +17,6 @@ app.use(cors());
 app.use(bodyParser.json());
 morganBody(app, {
   noColors: true,
-  prettify: true,
   logRequestBody: true,
   stream: log,
 });

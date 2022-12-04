@@ -29,6 +29,28 @@ const image = {
 
     res.json(images);
   },
+
+  
+  async generateVariation(req, res) {
+    const imageSchema = Joi.object({
+      url: Joi.string().required(),
+      api_key: Joi.string().required(),
+    });
+
+    const { error } = imageSchema.validate(req.body);
+
+    if (error) {
+      return res.json({
+        error: error.message,
+      });
+    }
+
+    const { url, api_key } = req.body;
+
+    const images = await ImageGenerate.generateVariation(url, api_key);
+    console.log(images);
+    res.json(images);
+  },
 };
 
 export default image;

@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/login", Authentication.login);
 router.post("/leaderboard", fetch.leaderboard);
-router.post("/generate-image", image.generateImage);
+router.post("/images/generations", image.generateImage);
+router.post("/images/variations", image.generateVariation);
 
 export default router;
