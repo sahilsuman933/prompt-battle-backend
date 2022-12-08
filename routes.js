@@ -1,12 +1,16 @@
 import express from "express";
-import Authentication from "./Controllers/Authentication";
-import fetch from "./Controllers/fetchData";
+
 import image from "./Controllers/image";
+import fetch from "./Controllers/fetchData";
 const router = express.Router();
 
-router.post("/login", Authentication.login);
-router.post("/leaderboard", fetch.leaderboard);
 router.post("/images/generations", image.generateImage);
-router.post("/images/variations", image.generateVariation);
+router.post("/submission", image.submission);
+router.post("/votes", fetch.upVote);
+
+// Get Data Routes
+router.get("/users", fetch.users);
+router.get("/polling", fetch.polling);
+router.get("/leaderboard", fetch.leaderboard);
 
 export default router;

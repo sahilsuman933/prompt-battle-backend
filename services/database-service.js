@@ -1,5 +1,18 @@
 import db from "../database";
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+import Crypto from "crypto";
 
 const DB = {
   async fetchData(collectionName) {
@@ -30,6 +43,28 @@ const DB = {
   async updateData(collectionName, id, data) {
     const userDoc = doc(db, collectionName, id);
     await updateDoc(userDoc, data);
+  },
+
+  async uploadImage(data) {
+    const storage = getStorage();
+    const storageRef = ref(
+      storage,
+      `${Crypto.randomBytes(32).toString("hex")}`
+    );
+    let imageURL;
+    await uploadString(storageRef, data, "data_url").then();
+
+    await getDownloadURL(storageRef)
+      .then((url) => {
+        imageURL = url;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return {
+      imageURL,
+    };
   },
 };
 

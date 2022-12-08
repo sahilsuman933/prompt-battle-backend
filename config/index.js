@@ -9,6 +9,5 @@ export const {
   MESSAGING_SENDER_ID,
   APP_ID,
   MEASUREMENT_ID,
-  HASH_SECRET,
   OPENAI_API_KEY,
 } = process.env;

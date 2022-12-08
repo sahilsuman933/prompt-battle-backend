@@ -1,53 +1,32 @@
-import Joi from "joi";
 import ImageGenerate from "../services/image-generate";
+import ImageBase64Convert from "image-data-uri";
+import DB from "../services/database-service";
 
 const image = {
   async generateImage(req, res) {
-    const imageSchema = Joi.object({
-      api_key: Joi.string().required(),
-      prompt: Joi.string().required(),
-      amount: Joi.number().required(),
-      size: Joi.string().required(),
-    });
+    const { prompt } = req.body;
+    const image = await ImageGenerate.generateImage(prompt);
 
-    const { error } = imageSchema.validate(req.body);
-
-    if (error) {
-      return res.json({
-        error: error.message,
-      });
-    }
-
-    const { api_key, prompt, amount, size } = req.body;
-
-    const images = await ImageGenerate.generateImage(
-      prompt,
-      amount,
-      size,
-      api_key
-    );
-
-    res.json(images);
+    res.send(image);
   },
-
-  async generateVariation(req, res) {
-    const imageSchema = Joi.object({
-      url: Joi.string().required(),
-      api_key: Joi.string().required(),
-    });
-
-    const { error } = imageSchema.validate(req.body);
-
-    if (error) {
-      return res.json({
-        error: error.message,
+  async submission(req, res) {
+    const { id, img } = req.body;
+    await ImageBase64Convert.encodeFromURL(img)
+      .then(async (response) => {
+        const data = await DB.uploadImage(response);
+        DB.updateData("polling", id, {
+          imageURL: data.imageURL,
+          createdTime: new Date().getTime(),
+          votes: 0,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    }
 
-    const { url, api_key } = req.body;
-
-    const images = await ImageGenerate.generateVariation(url, api_key);
-    res.json(images);
+    res.send({
+      message: "Image Successfully Uploaded.",
+    });
   },
 };
 
