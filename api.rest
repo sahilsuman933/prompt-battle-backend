@@ -1,65 +1,138 @@
-POST /api/login
-REQUEST_BODY:
+GET localhost:8080/api/leaderboard
+RESPONSE_BODY: 
+[
+	{
+		"id": "2f6IA9TvMMeaBTqxY04F",
+		"team_name": "Highschool DXD",
+		"votes": "160"
+	},
+	{
+		"id": "39qwaXugYWir7mGgq6SJ",
+		"team_name": "BLOODY_MARY",
+		"votes": "200"
+	},
+	{
+		"id": "iMt8Wt9SJrYizeFpUTzf",
+		"team_name": "TeamX",
+		"votes": "150"
+	}
+]
+
+GET localhost:8080/api/users
+
+RESPONSE_BODY:
+[
+	{
+		"id": "E7C8L79DKvyooABOsNp1",
+		"name": "RandomGuy",
+		"team": "BLOODY_MARY"
+	},
+	{
+		"id": "mZv8418zJPZQQAmSE9WD",
+		"team": "TeamX",
+		"name": "Ashu"
+	},
+	{
+		"id": "ntSvC3r4YaPI8iRIDZl5",
+		"team": "Highschool DXD",
+		"name": "Sahil"
+	}
+]
+
+POST localhost:8080/api/data
+
+REQUEST_BODY: 
 {
-	"name":"RandomGuy",
-	"team_name":"BLOODY_MARY",
-	"security_code":"892432",
-	"api_key":"AIzaSyBG_9s2JJDUeBLtMenyPtIBsVLupa8vRB8"
+	"collection_name":"ip",
+	"data":{
+		"ip":"117.198.102.157"
+	}	
 }
 
-POST /api/leaderboard
-
-POST /api/images/generations
-REQUEST_BODY:
+RESPONSE_BODY:
 {
-	"api_key":"AIzaSyBG_9s2JJDUeBLtMenyPtIBsVLupa8vRB8",
-	"prompt":"giga chad",
-	"amount":2,
-	"size":"1024x1024"
+	"message": "Data Added"
 }
 
-RESPONSE:
+POST localhost:8080/api/images/generations
+
+REQUEST_BODY:
+{
+  "prompt": "A cute baby sea otter"
+}
+RESPONSE_BODY:
+
 {
 	"images": {
-		"created": 1670099991,
+		"created": 1670622088,
 		"data": [
 			{
-				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-2eRwDttZ4srosmM17vvJHHJB.png?st=2022-12-03T19%3A39%3A51Z&se=2022-12-03T21%3A39%3A51Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-03T12%3A53%3A55Z&ske=2022-12-04T12%3A53%3A55Z&sks=b&skv=2021-08-06&sig=7/%2BZ6pJ7b4dGClvJtAJ0OmDfaSKvIBVDLSUDVCv6GlI%3D"
+				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-fUYjezM7HGKyqw0qqPctcKCk.png?st=2022-12-09T20%3A41%3A28Z&se=2022-12-09T22%3A41%3A28Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-09T18%3A24%3A07Z&ske=2022-12-10T18%3A24%3A07Z&sks=b&skv=2021-08-06&sig=JA6QwbNyhy61ndEjRn2ycBm/pM6ZJ7h2oRa01EbN0rM%3D"
 			},
 			{
-				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-Xd5hsV1ANWKSu0ujcHTEvG68.png?st=2022-12-03T19%3A39%3A51Z&se=2022-12-03T21%3A39%3A51Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-03T12%3A53%3A55Z&ske=2022-12-04T12%3A53%3A55Z&sks=b&skv=2021-08-06&sig=3UdG5R2vkp5LcH8VB/7DgQHkN5EEm6gLT289BpiIv3I%3D"
+				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-vfk5v3Na94HSRAC18HQyj4da.png?st=2022-12-09T20%3A41%3A28Z&se=2022-12-09T22%3A41%3A28Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-09T18%3A24%3A07Z&ske=2022-12-10T18%3A24%3A07Z&sks=b&skv=2021-08-06&sig=vVLqPOjq16PDrEZqWbSva9p3Te4x72z2JpBUKP/XKHs%3D"
+			},
+			{
+				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-I8ymmA8y7ojT8a7KYH43KxBf.png?st=2022-12-09T20%3A41%3A28Z&se=2022-12-09T22%3A41%3A28Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-09T18%3A24%3A07Z&ske=2022-12-10T18%3A24%3A07Z&sks=b&skv=2021-08-06&sig=y/U7Yv0YnHQCw/o3YjYBgjf7N7e0UrKIgW4r5%2BeWHbI%3D"
+			},
+			{
+				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-vySo8KW5N7r63b93R5z3Ojdz.png?st=2022-12-09T20%3A41%3A28Z&se=2022-12-09T22%3A41%3A28Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-09T18%3A24%3A07Z&ske=2022-12-10T18%3A24%3A07Z&sks=b&skv=2021-08-06&sig=2MZZ72NWRJjm5vxaa%2BLXfii3HW2lb6YuK/dvihyvGlA%3D"
 			}
 		]
 	}
 }
 
-POST /api/images/variations
+POST localhost:8080/api/polling
+
+REQUEST_BODY:
+{
+	"ip":"117.198.102.157"
+}
+RESPONSE_BODY:
+
+{
+	"message": "Polling Ended",
+	"isPollingStarted": false
+}
+
+
+POST localhost:8080/api/register
 
 REQUEST_BODY:
 
 {
-	"api_key":"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",
-"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-IvXAKAuOd6Fqn1wAiGGr2Znz.png?st=2022-12-04T21%3A32%3A48Z&se=2022-12-04T23%3A32%3A48Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-04T14%3A10%3A54Z&ske=2022-12-05T14%3A10%3A54Z&sks=b&skv=2021-08-06&sig=15gY5nBMOyt2heIE8o5U6xKfvidZnisawyB3mbjBNSo%3D"
+	"name":"Testing",
+	"team_name":"XYZ"
 }
 
-
-
-RESPONSE:
+RESPONSE_BODY:
 
 {
-	"data": {
-		"created": 1670193274,
-		"data": [
-			{
-				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-aJga5NC4YIafipGZF6NCK1JT.png?st=2022-12-04T21%3A34%3A34Z&se=2022-12-04T23%3A34%3A34Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-04T20%3A56%3A39Z&ske=2022-12-05T20%3A56%3A39Z&sks=b&skv=2021-08-06&sig=hSWTdR8yVMZ2tYyy63V1i6tZ6hiwW8zNStW6EA3x2P4%3D"
-			},
-			{
-				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-frC2pYDwZwAwF1Va6iRFW4x8.png?st=2022-12-04T21%3A34%3A34Z&se=2022-12-04T23%3A34%3A34Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-04T20%3A56%3A39Z&ske=2022-12-05T20%3A56%3A39Z&sks=b&skv=2021-08-06&sig=3GyPBvjLfwbUkttl9pfiBuGfCdCaB1Fmog33YYn0wP4%3D"
-			},
-			{
-				"url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-9hmycHRXxRqRsiMuKetH2IzI.png?st=2022-12-04T21%3A34%3A34Z&se=2022-12-04T23%3A34%3A34Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-04T20%3A56%3A39Z&ske=2022-12-05T20%3A56%3A39Z&sks=b&skv=2021-08-06&sig=v4IB/RPN7Pj3nCdXW1mH6N2BkOdAgM4GsRgxEUHZiz8%3D"
-			}
-		]
-	}
+	"Success": true
 }
 
+POST localhost:8080/api/submission
+
+REQUEST_BODY:
+{
+	"id":"YT54xuJrgkUk6UbeifIm",
+	"img":"https://oaidalleapiprodscus.blob.core.windows.net/private/org-uEDvbcGG5dtIkyReNQqG2ckh/user-hDvCrfaWvhXPKCcfkEtAY68y/img-6lUAiNpFqMN9p32JNsqpAv5b.png?st=2022-12-09T17%3A10%3A41Z&se=2022-12-09T19%3A10%3A41Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-09T18%3A10%3A41Z&ske=2022-12-10T18%3A10%3A41Z&sks=b&skv=2021-08-06&sig=6UGgi91DsRXkmDHhjfu7pkmu2c4bt/6NdqOXBFur9wo%3D"
+}
+
+RESPONSE_BODY:
+{
+	"message": "Image Successfully Uploaded."
+}
+
+POST localhost:8080/api/votes
+
+REQUEST_BODY:
+{
+		"id":"2pRsDVvU8mf9N3Zue5zV",
+		"ip":"117.198.102.157"
+}
+
+RESPONSE_BODY:
+{
+	"message": "Successfully Upvoted xyz"
+}
