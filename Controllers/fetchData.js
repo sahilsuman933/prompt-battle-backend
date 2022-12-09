@@ -30,7 +30,7 @@ const fetch = {
       parseInt(data[0].createdTime),
       parseInt(data[1].createdTime),
     ].sort();
-    const endTime = time[1] + 180 * 1000;
+    const endTime = time[1] + 90 * 1000;
     const currTime = Date.now();
 
     if (currTime < endTime) {
