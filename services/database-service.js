@@ -44,7 +44,6 @@ const DB = {
     const userDoc = doc(db, collectionName, id);
     await updateDoc(userDoc, data);
   },
-
   async uploadImage(data) {
     const storage = getStorage();
     const storageRef = ref(
@@ -65,6 +64,10 @@ const DB = {
     return {
       imageURL,
     };
+  },
+  async addData(collectionName, data) {
+    const usersCollectionRef = collection(db, collectionName);
+    await addDoc(usersCollectionRef, data);
   },
 };
 

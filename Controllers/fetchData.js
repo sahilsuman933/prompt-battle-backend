@@ -59,6 +59,13 @@ const fetch = {
       }
     });
   },
+  async registerUser(req, res) {
+    const { name, team_name } = req.body;
+    await DB.addData("users", { name: name, team_name: team_name });
+    res.send({
+      Success: true,
+    });
+  },
 };
 
 export default fetch;

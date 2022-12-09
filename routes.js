@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/images/generations", image.generateImage);
 router.post("/submission", image.submission);
 router.post("/votes", fetch.upVote);
+router.post("/register", fetch.registerUser);
 
 // Get Data Routes
 router.get("/users", fetch.users);
