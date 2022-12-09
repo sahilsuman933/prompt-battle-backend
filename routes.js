@@ -9,7 +9,7 @@ router.post("/submission", image.submission);
 router.post("/votes", fetch.upVote);
 router.post("/register", fetch.registerUser);
 
-// Get Data Routes
+// Get Data Routes [FOR EVENT MANAGEMENT]
 router.get("/users", fetch.users);
 router.get("/polling", fetch.polling);
 router.get("/leaderboard", fetch.leaderboard);

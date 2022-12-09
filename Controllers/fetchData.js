@@ -13,14 +13,14 @@ const fetch = {
     const data = await DB.fetchData("polling");
     let filteredData = [];
 
-    data.map((item) => {
-      if (!("imageURL" in item)) {
-        return res.send({
-          message: "Polling Hasn't Started Yet",
-          isPollingStarted: false,
-        });
-      }
+    if (!("imageURL" in data[0]) || !("imageURL" in data[1])) {
+      return res.send({
+        message: "Polling Hasn't Started Yet",
+        isPollingStarted: false,
+      });
+    }
 
+    data.map((item) => {
       const { id, team_name, imageURL } = item;
 
       filteredData = [...filteredData, { id, team_name, imageURL }];
