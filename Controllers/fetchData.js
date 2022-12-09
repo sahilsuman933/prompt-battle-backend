@@ -12,8 +12,18 @@ const fetch = {
   async polling(req, res) {
     const data = await DB.fetchData("polling");
     let filteredData = [];
+    let isVoted = false;
 
-    if (!("imageURL" in data[0]) || !("imageURL" in data[1])) {
+    const { ip } = req.body;
+
+    const votingData = await DB.fetchData("ip");
+    votingData.map((vote) => {
+      if (vote.ip == ip) {
+        isVoted = true;
+      }
+    });
+
+    if (!("imageURL" in data[0]) && !("imageURL" in data[1])) {
       return res.send({
         message: "Polling Hasn't Started Yet",
         isPollingStarted: false,
@@ -38,6 +48,7 @@ const fetch = {
         team: filteredData,
         time: Math.round((endTime - currTime) / 1000),
         isPollingStarted: true,
+        isVoted,
       });
     } else {
       return res.send({
@@ -47,7 +58,9 @@ const fetch = {
     }
   },
   async upVote(req, res) {
-    const { id } = req.body;
+    const { id, ip } = req.body;
+
+    await DB.addData("ip", { ip });
 
     const data = await DB.fetchData("polling");
     data.map((item) => {
@@ -64,6 +77,15 @@ const fetch = {
     await DB.addData("users", { name: name, team_name: team_name });
     res.send({
       Success: true,
+    });
+  },
+  async addData(req, res) {
+    const { collection_name, data } = req.body;
+
+    await DB.addData(collection_name, data);
+
+    res.send({
+      message: "Data Added",
     });
   },
 };
