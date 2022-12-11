@@ -11,18 +11,12 @@ const image = {
   },
   async submission(req, res) {
     const { id, img } = req.body;
-    await ImageBase64Convert.encodeFromURL(img)
-      .then(async (response) => {
-        const data = await DB.uploadImage(response);
-        DB.updateData("polling", id, {
-          imageURL: data.imageURL,
-          createdTime: new Date().getTime(),
-          votes: 0,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    DB.updateData("polling", id, {
+      imageURL: img,
+      createdTime: new Date().getTime(),
+      votes: 0,
+    });
 
     res.send({
       message: "Image Successfully Uploaded.",
